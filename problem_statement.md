@@ -26,8 +26,19 @@ Instead of making access decisions only based on static identity and permissions
 * Internal-resource requirements
 * File-transfer behavior
 * Administrator emergency status
+* Source-machine risk and quarantine state
+* Target-machine risk, quarantine state, and business criticality
+* Development, test, or production environment
+* Resource sensitivity
+* Sandbox isolation, execution privileges, and network access
+* Authenticated mock identity, session validity, revocation, and user-to-agent delegation
+* Explicit task scope, allowed tools, exact resources/targets, and parameter constraints
+* Provenance of the authorizing instruction and external data
+* Human approver authority, approval expiry, and consistency with the executed call
 
-The prototype also introduces a **Security Epoch** mechanism. When the enterprise security environment changes significantly, the Security Epoch changes and previously issued authorizations become stale. AI agents must then re-evaluate remaining actions before execution.
+Machine and resource sensitivity are distinct from current threat conditions: a healthy production database may still be highly sensitive, while a single compromised agent runner should trigger restrictions even when enterprise-wide DSI is low. The prototype now represents these local factors separately and applies explicit blocks or approval requirements. It uses simulated context rather than live device telemetry or authenticated asset inventory.
+
+The prototype also introduces a **Security Epoch** mechanism. When the enterprise security level changes, the Security Epoch changes and previously issued authorizations become stale. A separate **Environment Epoch** changes whenever the source, target, resource, or execution context changes within a policy-engine instance. Plans record both versions and the environment snapshot. AI agents must then re-evaluate remaining actions before execution, including when local machine risk changes without changing the enterprise DSI.
 
 This creates a form of continuous authorization in which previously valid permissions are not automatically trusted after the security environment changes.
 
@@ -39,15 +50,19 @@ A related experimental question is:
 
 **Can DSI-driven adaptive authorization reduce harmful AI-agent actions during cybersecurity incidents while preserving legitimate low-risk business operations?**
 
-The initial prototype compares agent identity, department, action sensitivity, and dynamic enterprise security conditions before returning one of four possible authorization decisions:
+The complete local prototype validates issuer-owned mock sessions and user-to-agent delegation, task-specific grants, registered tool arguments and resources, input provenance, department, delegated permissions, action sensitivity, enterprise security conditions, and machine/resource/execution context. It returns one of four possible authorization decisions:
 
 * ALLOW
 * REQUIRE HUMAN APPROVAL
 * BLOCK
 * REEVALUATE
 
+Pending approval requires an authorized human identity and binds to the exact call and its security context. Approved or directly allowed calls receive short-lived, one-use opaque permits. Before invoking a local stub tool, the runtime checks identity, task, arguments, resources, policy state, and approval validity again. A replay or substituted call cannot reuse the permit. Real identity authentication, telemetry attestation, tool isolation, remote execution, and semantic understanding of whether an action fulfills the user's purpose remain outside the demo; purpose is enforced through explicitly configured task constraints.
+
 Future experiments could compare static access control, traditional Zero Trust authorization, and DSI-driven adaptive authorization under simulated agent attacks and enterprise security incidents.
 
 Potential evaluation metrics include attack success rate, unauthorized action rate, data leakage rate, legitimate task completion rate, false blocking rate, human approval frequency, and system response latency.
 
 The broader goal of this research is to explore how enterprises can safely use increasingly autonomous AI agents while maintaining security, accountability, and operational usefulness.
+
+The [factor inventory and brainstorm](model_factors.md) distinguish implemented decision inputs, audit-only metadata, and candidate extensions. The immediate evaluation can also compare DSI-only authorization against DSI plus environment controls to measure whether local context improves outcomes without excessive blocking.
