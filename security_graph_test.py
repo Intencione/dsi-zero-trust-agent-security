@@ -5,6 +5,8 @@ from langgraph.graph import StateGraph, START, END
 from agent_demo import DEMO_ENVIRONMENT, Decision
 from secure_agent_demo import make_demo
 from secure_runtime import ToolCall
+from telemetry.dsi_service import DSIService
+from telemetry.simulator import SecurityEventSimulator
 
 
 # ============================================================
@@ -283,12 +285,7 @@ run_call(
 
 old_context = runtime.policy.capture_context()
 
-runtime.policy.dsi.calculate(
-    network_anomaly=100,
-    unknown_operations=100,
-    destructive_activity=100,
-    other_alerts=100,
-)
+SecurityEventSimulator(DSIService(runtime.policy)).trigger_incident()
 
 print("\n*** ENTERPRISE SECURITY INCIDENT ***")
 print(

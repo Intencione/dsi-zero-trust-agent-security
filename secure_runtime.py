@@ -622,7 +622,7 @@ class SecureRuntime:
                         self._approver(record.approver_session_key, call.task_id)
                     self._attempted.add((call.task_id, call.request_id))
                     try:
-                        output = tool.handler(call)
+                        output = self._dispatch(tool, call)
                         result = RuntimeResult(Decision.ALLOW, "Authorized tool completed", executed=True, output=output)
                     except Exception as error:
                         result = RuntimeResult(
@@ -632,3 +632,7 @@ class SecureRuntime:
         except ValueError as error:
             result = RuntimeResult(Decision.BLOCK, str(error))
         return self._emit("execute", call, result, agent_token)
+
+    def _dispatch(self, tool, call):
+        """Extension point after all authorization checks and permit consumption."""
+        return tool.handler(call)

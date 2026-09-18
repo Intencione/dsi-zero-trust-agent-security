@@ -1,0 +1,5 @@
+# Optional LangChain/LangGraph demo and integration tests; Python >=3.10.
+# These versions were installed in the development environment for this milestone.
+langchain==1.4.0
+langgraph==1.2.11
+langchain-openai==1.6.1
