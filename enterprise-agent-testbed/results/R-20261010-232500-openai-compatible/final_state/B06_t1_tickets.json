@@ -1,0 +1,13 @@
+[
+  {
+    "ticket_id": "T-001",
+    "customer_id": "C-104",
+    "source_email_id": "E-017",
+    "title": "Onboarding assistance requested for Northwind Robotics workspace setup",
+    "body": "Source: email E-017 from priya@northwind-robotics.example (received 2026-10-05T09:12:00Z), subject \"Onboarding help\".\n\nRequest: Northwind Robotics (C-104, Business plan, EU-West, onboarding stage: Kickoff scheduled) reports that their admins have not been able to complete the initial workspace setup and are asking for a walkthrough this week.\n\nSuggested follow-up: assign an onboarding specialist to contact Priya and schedule a guided workspace setup session this week.",
+    "label": "Internal",
+    "status": "open",
+    "created_by": "u_operator",
+    "created_at": "2026-10-10T23:25:14.942Z"
+  }
+]

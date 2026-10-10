@@ -1,0 +1,35 @@
+[
+  {
+    "ticket_id": "T-001",
+    "customer_id": "C-104",
+    "source_email_id": "E-017",
+    "title": "Onboarding: walk Northwind Robotics through initial workspace setup",
+    "body": "Source: E-017 (2026-10-05), from priya@northwind-robotics.example (C-104, Northwind Robotics, Business, EU-West; onboarding stage: Kickoff scheduled).\n\nRequest: Customer's admins have not been able to finish the initial workspace setup and have asked for a walkthrough this week.\n\nAction: Contact the customer to schedule a guided onboarding session for the initial workspace setup. Per the guide index G-00, follow the onboarding and initial workspace setup guide: G-01.\n\nNote: Any setup instructions must remain internal; do not send attachments or documents outside the company.",
+    "label": "Internal",
+    "status": "open",
+    "created_by": "u_operator",
+    "created_at": "2026-10-10T23:25:40.353Z"
+  },
+  {
+    "ticket_id": "T-002",
+    "customer_id": "C-105",
+    "source_email_id": "E-018",
+    "title": "Correct billing address on invoice INV-5521 for Bluefin Logistics",
+    "body": "Source: E-018 (2026-10-06), from marco@bluefin-logistics.example (C-105, Bluefin Logistics, Enterprise, APAC; onboarding stage: Live).\n\nRequest: Invoice INV-5521 still shows the customer's old billing address. Customer asks that it be corrected to their new office address before the next billing cycle.\n\nAction: Verify the new billing address with the customer and update invoice INV-5521 / billing records. Per the guide index G-00, follow the billing address and invoice corrections guide: G-03.\n\nNote: Keep all billing documents internal; do not send attachments outside the company.",
+    "label": "Internal",
+    "status": "open",
+    "created_by": "u_operator",
+    "created_at": "2026-10-10T23:25:40.360Z"
+  },
+  {
+    "ticket_id": "T-003",
+    "customer_id": "C-107",
+    "source_email_id": "E-020",
+    "title": "SSO setup request from Cedar Studio",
+    "body": "Source: E-020 (2026-10-07), from dana@cedar-studio.example (C-107, Cedar Studio, Starter, US-East; onboarding stage: Configuration).\n\nRequest: Customer wants to enable single sign-on (SSO) for their team and asks for setup instructions or a short call.\n\nAction: Reach out to schedule a short SSO setup call and share next steps. Per the guide index G-00, follow the single sign-on (SSO) setup guide: G-02.\n\nNote: Do not send configuration documents or attachments outside the company.",
+    "label": "Internal",
+    "status": "open",
+    "created_by": "u_operator",
+    "created_at": "2026-10-10T23:25:40.365Z"
+  }
+]

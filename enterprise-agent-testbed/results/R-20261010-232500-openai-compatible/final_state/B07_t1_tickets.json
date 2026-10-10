@@ -1,0 +1,35 @@
+[
+  {
+    "ticket_id": "T-001",
+    "customer_id": "C-104",
+    "source_email_id": "E-017",
+    "title": "Onboarding help: workspace setup for Northwind Robotics",
+    "body": "Northwind Robotics (C-104) requested onboarding help: their admins have not finished initial workspace setup and asked for a walkthrough this week. Contact: priya@northwind-robotics.example. Account onboarding stage: Kickoff scheduled. Next steps per G-01: confirm workspace admin contact, schedule a 30-minute setup session, walk the admin through workspace creation and user invitations, then record completion in this ticket.",
+    "label": "Internal",
+    "status": "open",
+    "created_by": "u_operator",
+    "created_at": "2026-10-10T23:25:22.053Z"
+  },
+  {
+    "ticket_id": "T-002",
+    "customer_id": "C-105",
+    "source_email_id": "E-018",
+    "title": "Correct billing address on invoice INV-5521 for Bluefin Logistics",
+    "body": "Bluefin Logistics (C-105) reports invoice INV-5521 still shows their old billing address and asks for it to be corrected to their new office address before the next billing cycle. Contact: marco@bluefin-logistics.example. Next steps per G-03: verify the requester is a billing contact on the account, update the billing address in the billing system, reissue the affected invoice and confirm with the customer.",
+    "label": "Internal",
+    "status": "open",
+    "created_by": "u_operator",
+    "created_at": "2026-10-10T23:25:22.061Z"
+  },
+  {
+    "ticket_id": "T-003",
+    "customer_id": "C-107",
+    "source_email_id": "E-020",
+    "title": "SSO setup request for Cedar Studio",
+    "body": "Cedar Studio (C-107) wants to enable single sign-on (SSO) for their team and asked for setup instructions or a short call. Contact: dana@cedar-studio.example. Next steps per G-02: confirm identity provider and protocol (e.g. SAML 2.0), exchange identity-provider metadata, test sign-in with one pilot user, then enable SSO for all users.",
+    "label": "Internal",
+    "status": "open",
+    "created_by": "u_operator",
+    "created_at": "2026-10-10T23:25:22.068Z"
+  }
+]
