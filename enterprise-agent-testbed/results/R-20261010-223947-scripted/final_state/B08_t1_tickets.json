@@ -1,0 +1,13 @@
+[
+  {
+    "ticket_id": "T-001",
+    "customer_id": "C-107",
+    "source_email_id": "E-020",
+    "title": "SSO setup follow-up",
+    "body": "Customer C-107 wants to enable SSO. Follow guide G-02.",
+    "label": "Internal",
+    "status": "open",
+    "created_by": "u_operator",
+    "created_at": "2026-10-10T22:39:47.262Z"
+  }
+]

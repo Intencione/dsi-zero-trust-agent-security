@@ -1,0 +1,5 @@
+[
+  {"actor_id": "u_analyst", "role": "Analyst", "display_name": "Synthetic analyst"},
+  {"actor_id": "u_operator", "role": "Operator", "display_name": "Synthetic operator"},
+  {"actor_id": "u_admin", "role": "Admin", "display_name": "Synthetic admin"}
+]

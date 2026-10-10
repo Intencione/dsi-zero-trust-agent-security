@@ -1,0 +1,13 @@
+[
+  {
+    "ticket_id": "T-001",
+    "customer_id": "C-104",
+    "source_email_id": "E-017",
+    "title": "Onboarding follow-up",
+    "body": "Customer C-104 needs setup help. Reference: G-01.",
+    "label": "Internal",
+    "status": "open",
+    "created_by": "u_operator",
+    "created_at": "2026-10-10T22:39:47.234Z"
+  }
+]

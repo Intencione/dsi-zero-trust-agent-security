@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "audit_event.schema.json",
+  "title": "Audit event (testbed v0.1)",
+  "description": "One JSONL line per event. Each tool call produces a 'pre' event (proposed call + authorization decision, written BEFORE execution) and a 'post' event (what actually happened), linked by call_id. A 'pre' without a matching 'post' means the call was interrupted. Events are written by application code, never by the model.",
+  "type": "object",
+  "properties": {
+    "schema_version": {"const": "audit-0.1"},
+    "event_id": {"type": "string"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "run_id": {"type": "string"},
+    "task_id": {"type": "string"},
+    "trial": {"type": "integer", "minimum": 1},
+    "step": {"type": "integer", "minimum": 1, "description": "Sequential tool-call number within the task trial (step 04 = 4th call)."},
+    "turn": {"type": "integer", "minimum": 1, "description": "Planner turn that proposed this call (one turn may propose several calls)."},
+    "call_id": {"type": "string"},
+    "phase": {"enum": ["pre", "post"]},
+    "actor_id": {"type": "string"},
+    "role": {"enum": ["Analyst", "Operator", "Admin"]},
+    "tool": {"type": "string"},
+    "arguments": {"type": ["object", "null"], "description": "Sanitized model-supplied arguments (long text truncated, sha256 kept)."},
+    "resource_ids": {"type": "array", "items": {"type": "string"}},
+    "resource_labels": {"type": "object", "additionalProperties": {"enum": ["Public", "Internal", "Restricted"]}},
+    "schema_valid": {"type": "boolean"},
+    "decision": {"enum": ["allow", "deny", "not_evaluated"]},
+    "decision_reason": {"type": "string"},
+    "policy_version": {"type": "string"},
+    "status": {"enum": ["executed", "denied", "error"]},
+    "result_ref": {"type": ["string", "null"]},
+    "error": {
+      "type": ["object", "null"],
+      "properties": {"code": {"type": "string"}, "message": {"type": "string"}},
+      "required": ["code", "message"]
+    },
+    "state_change": {
+      "type": "object",
+      "properties": {
+        "tickets_created": {"type": "integer", "minimum": 0},
+        "ticket_ids": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["tickets_created", "ticket_ids"],
+      "additionalProperties": false
+    },
+    "duration_ms": {"type": "number", "minimum": 0}
+  },
+  "required": ["schema_version", "event_id", "timestamp", "run_id", "task_id", "trial", "step", "turn", "call_id", "phase", "actor_id", "role", "tool", "decision", "policy_version"],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {"properties": {"phase": {"const": "pre"}}},
+      "then": {"required": ["arguments", "resource_ids", "resource_labels", "schema_valid", "decision_reason"]}
+    },
+    {
+      "if": {"properties": {"phase": {"const": "post"}}},
+      "then": {"required": ["status", "result_ref", "error", "state_change", "duration_ms"]}
+    },
+    {
+      "if": {"properties": {"status": {"const": "denied"}}, "required": ["status"]},
+      "then": {"properties": {"decision": {"const": "deny"}, "state_change": {"properties": {"tickets_created": {"const": 0}}}}}
+    }
+  ]
+}

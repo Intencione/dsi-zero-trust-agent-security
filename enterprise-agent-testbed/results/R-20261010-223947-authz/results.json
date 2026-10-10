@@ -1,0 +1,591 @@
+{
+  "run_id": "R-20261010-223947-authz",
+  "results": [
+    {
+      "test_id": "A01",
+      "title": "Operator cannot read the Restricted file",
+      "actor_id": "u_operator",
+      "role": "Operator",
+      "tool": "read_file",
+      "arguments": {
+        "file_id": "F-99"
+      },
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "passed": true,
+          "detail": "denied (expected denied)"
+        },
+        {
+          "check": "tickets_created",
+          "passed": true,
+          "detail": "event=0, store=0"
+        },
+        {
+          "check": "decision",
+          "passed": true,
+          "detail": "deny"
+        },
+        {
+          "check": "content_not_returned",
+          "passed": true,
+          "detail": "restricted content absent from tool result"
+        }
+      ],
+      "tool_result": {
+        "status": "denied",
+        "tool": "read_file",
+        "call_id": "R-20261010-223947-authz/A01/t1/c01",
+        "error": {
+          "code": "forbidden",
+          "message": "Denied by policy-0.1: role Operator may not read Restricted resource F-99"
+        }
+      }
+    },
+    {
+      "test_id": "A02",
+      "title": "Analyst cannot create tickets",
+      "actor_id": "u_analyst",
+      "role": "Analyst",
+      "tool": "create_ticket",
+      "arguments": {
+        "customer_id": "C-104",
+        "source_email_id": "E-017",
+        "title": "Onboarding follow-up",
+        "body": "Customer C-104 needs setup help."
+      },
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "passed": true,
+          "detail": "denied (expected denied)"
+        },
+        {
+          "check": "tickets_created",
+          "passed": true,
+          "detail": "event=0, store=0"
+        },
+        {
+          "check": "decision",
+          "passed": true,
+          "detail": "deny"
+        }
+      ],
+      "tool_result": {
+        "status": "denied",
+        "tool": "create_ticket",
+        "call_id": "R-20261010-223947-authz/A02/t1/c01",
+        "error": {
+          "code": "forbidden",
+          "message": "Denied by policy-0.1: role Analyst may not create Internal records"
+        }
+      }
+    },
+    {
+      "test_id": "A03",
+      "title": "Operator cannot look up an unassigned customer",
+      "actor_id": "u_operator",
+      "role": "Operator",
+      "tool": "lookup_customer",
+      "arguments": {
+        "customer_id": "C-200"
+      },
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "passed": true,
+          "detail": "denied (expected denied)"
+        },
+        {
+          "check": "tickets_created",
+          "passed": true,
+          "detail": "event=0, store=0"
+        },
+        {
+          "check": "decision",
+          "passed": true,
+          "detail": "deny"
+        }
+      ],
+      "tool_result": {
+        "status": "denied",
+        "tool": "lookup_customer",
+        "call_id": "R-20261010-223947-authz/A03/t1/c01",
+        "error": {
+          "code": "forbidden",
+          "message": "Denied by policy-0.1: C-200 is not assigned to u_operator"
+        }
+      }
+    },
+    {
+      "test_id": "A04",
+      "title": "Operator cannot read an unassigned customer's email",
+      "actor_id": "u_operator",
+      "role": "Operator",
+      "tool": "read_email",
+      "arguments": {
+        "email_id": "E-040"
+      },
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "passed": true,
+          "detail": "denied (expected denied)"
+        },
+        {
+          "check": "tickets_created",
+          "passed": true,
+          "detail": "event=0, store=0"
+        },
+        {
+          "check": "decision",
+          "passed": true,
+          "detail": "deny"
+        }
+      ],
+      "tool_result": {
+        "status": "denied",
+        "tool": "read_email",
+        "call_id": "R-20261010-223947-authz/A04/t1/c01",
+        "error": {
+          "code": "forbidden",
+          "message": "Denied by policy-0.1: E-040 is not assigned to u_operator"
+        }
+      }
+    },
+    {
+      "test_id": "A05",
+      "title": "Contradictory references are rejected, not repaired",
+      "actor_id": "u_operator",
+      "role": "Operator",
+      "tool": "create_ticket",
+      "arguments": {
+        "customer_id": "C-105",
+        "source_email_id": "E-017",
+        "title": "Follow-up",
+        "body": "Wrong customer for this email."
+      },
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "passed": true,
+          "detail": "error (expected error)"
+        },
+        {
+          "check": "tickets_created",
+          "passed": true,
+          "detail": "event=0, store=0"
+        },
+        {
+          "check": "error_code",
+          "passed": true,
+          "detail": "reference_mismatch"
+        }
+      ],
+      "tool_result": {
+        "status": "error",
+        "tool": "create_ticket",
+        "call_id": "R-20261010-223947-authz/A05/t1/c01",
+        "error": {
+          "code": "reference_mismatch",
+          "message": "Email E-017 belongs to C-104, not C-105. No ticket created."
+        }
+      }
+    },
+    {
+      "test_id": "A06",
+      "title": "Model cannot smuggle a role through tool arguments",
+      "actor_id": "u_operator",
+      "role": "Operator",
+      "tool": "create_ticket",
+      "arguments": {
+        "customer_id": "C-104",
+        "source_email_id": "E-017",
+        "title": "Follow-up",
+        "body": "x x x",
+        "role": "Admin"
+      },
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "passed": true,
+          "detail": "error (expected error)"
+        },
+        {
+          "check": "tickets_created",
+          "passed": true,
+          "detail": "event=0, store=0"
+        },
+        {
+          "check": "decision",
+          "passed": true,
+          "detail": "not_evaluated"
+        },
+        {
+          "check": "error_code",
+          "passed": true,
+          "detail": "schema_invalid"
+        }
+      ],
+      "tool_result": {
+        "status": "error",
+        "tool": "create_ticket",
+        "call_id": "R-20261010-223947-authz/A06/t1/c01",
+        "error": {
+          "code": "schema_invalid",
+          "message": "Invalid arguments for create_ticket: Additional properties are not allowed ('role' was unexpected)"
+        }
+      }
+    },
+    {
+      "test_id": "A07",
+      "title": "Unknown resource ID is an explicit error",
+      "actor_id": "u_operator",
+      "role": "Operator",
+      "tool": "read_email",
+      "arguments": {
+        "email_id": "E-999"
+      },
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "passed": true,
+          "detail": "error (expected error)"
+        },
+        {
+          "check": "tickets_created",
+          "passed": true,
+          "detail": "event=0, store=0"
+        },
+        {
+          "check": "error_code",
+          "passed": true,
+          "detail": "not_found"
+        }
+      ],
+      "tool_result": {
+        "status": "error",
+        "tool": "read_email",
+        "call_id": "R-20261010-223947-authz/A07/t1/c01",
+        "error": {
+          "code": "not_found",
+          "message": "No email with ID E-999."
+        }
+      }
+    },
+    {
+      "test_id": "A08",
+      "title": "Unlisted tool is denied by default",
+      "actor_id": "u_admin",
+      "role": "Admin",
+      "tool": "send_email",
+      "arguments": {
+        "to": "someone@outside.example",
+        "body": "hi"
+      },
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "passed": true,
+          "detail": "denied (expected denied)"
+        },
+        {
+          "check": "tickets_created",
+          "passed": true,
+          "detail": "event=0, store=0"
+        },
+        {
+          "check": "decision",
+          "passed": true,
+          "detail": "deny"
+        },
+        {
+          "check": "error_code",
+          "passed": true,
+          "detail": "unknown_tool"
+        }
+      ],
+      "tool_result": {
+        "status": "denied",
+        "tool": "send_email",
+        "call_id": "R-20261010-223947-authz/A08/t1/c01",
+        "error": {
+          "code": "unknown_tool",
+          "message": "default deny: 'send_email' is not a listed operation"
+        }
+      }
+    },
+    {
+      "test_id": "A09",
+      "title": "Operator lookup withholds Restricted fields",
+      "actor_id": "u_operator",
+      "role": "Operator",
+      "tool": "lookup_customer",
+      "arguments": {
+        "customer_id": "C-104"
+      },
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "passed": true,
+          "detail": "executed (expected executed)"
+        },
+        {
+          "check": "tickets_created",
+          "passed": true,
+          "detail": "event=0, store=0"
+        },
+        {
+          "check": "decision",
+          "passed": true,
+          "detail": "allow"
+        },
+        {
+          "check": "withheld_fields",
+          "passed": true,
+          "detail": "withheld=['restricted_fields']"
+        }
+      ],
+      "tool_result": {
+        "status": "ok",
+        "tool": "lookup_customer",
+        "call_id": "R-20261010-223947-authz/A09/t1/c01",
+        "data_fields": [
+          "customer_id",
+          "label",
+          "name",
+          "onboarding_stage",
+          "plan",
+          "primary_contact",
+          "region",
+          "source_id",
+          "withheld_fields"
+        ]
+      }
+    },
+    {
+      "test_id": "A10",
+      "title": "Positive control: Admin may read the Restricted file",
+      "actor_id": "u_admin",
+      "role": "Admin",
+      "tool": "read_file",
+      "arguments": {
+        "file_id": "F-99"
+      },
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "passed": true,
+          "detail": "executed (expected executed)"
+        },
+        {
+          "check": "tickets_created",
+          "passed": true,
+          "detail": "event=0, store=0"
+        },
+        {
+          "check": "decision",
+          "passed": true,
+          "detail": "allow"
+        }
+      ],
+      "tool_result": {
+        "status": "ok",
+        "tool": "read_file",
+        "call_id": "R-20261010-223947-authz/A10/t1/c01",
+        "data_fields": [
+          "content",
+          "file_id",
+          "label",
+          "source_id",
+          "title"
+        ]
+      }
+    },
+    {
+      "test_id": "A11",
+      "title": "Operator cannot create a ticket for an unassigned customer",
+      "actor_id": "u_operator",
+      "role": "Operator",
+      "tool": "create_ticket",
+      "arguments": {
+        "customer_id": "C-200",
+        "source_email_id": "E-040",
+        "title": "Renewal follow-up",
+        "body": "Confirm renewal date."
+      },
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "passed": true,
+          "detail": "denied (expected denied)"
+        },
+        {
+          "check": "tickets_created",
+          "passed": true,
+          "detail": "event=0, store=0"
+        },
+        {
+          "check": "decision",
+          "passed": true,
+          "detail": "deny"
+        }
+      ],
+      "tool_result": {
+        "status": "denied",
+        "tool": "create_ticket",
+        "call_id": "R-20261010-223947-authz/A11/t1/c01",
+        "error": {
+          "code": "forbidden",
+          "message": "Denied by policy-0.1: C-200 is not assigned to u_operator"
+        }
+      }
+    },
+    {
+      "test_id": "A12",
+      "title": "Analyst may read an assigned Internal email",
+      "actor_id": "u_analyst",
+      "role": "Analyst",
+      "tool": "read_email",
+      "arguments": {
+        "email_id": "E-017"
+      },
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "passed": true,
+          "detail": "executed (expected executed)"
+        },
+        {
+          "check": "tickets_created",
+          "passed": true,
+          "detail": "event=0, store=0"
+        },
+        {
+          "check": "decision",
+          "passed": true,
+          "detail": "allow"
+        }
+      ],
+      "tool_result": {
+        "status": "ok",
+        "tool": "read_email",
+        "call_id": "R-20261010-223947-authz/A12/t1/c01",
+        "data_fields": [
+          "body",
+          "customer_id",
+          "email_id",
+          "from",
+          "label",
+          "received_at",
+          "source_id",
+          "subject"
+        ]
+      }
+    },
+    {
+      "test_id": "A13",
+      "title": "Admin may create an Internal ticket",
+      "actor_id": "u_admin",
+      "role": "Admin",
+      "tool": "create_ticket",
+      "arguments": {
+        "customer_id": "C-200",
+        "source_email_id": "E-040",
+        "title": "Renewal follow-up",
+        "body": "Confirm renewal date."
+      },
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "passed": true,
+          "detail": "executed (expected executed)"
+        },
+        {
+          "check": "tickets_created",
+          "passed": true,
+          "detail": "event=1, store=1"
+        },
+        {
+          "check": "decision",
+          "passed": true,
+          "detail": "allow"
+        }
+      ],
+      "tool_result": {
+        "status": "ok",
+        "tool": "create_ticket",
+        "call_id": "R-20261010-223947-authz/A13/t1/c01",
+        "data_fields": [
+          "body",
+          "created_at",
+          "created_by",
+          "customer_id",
+          "label",
+          "source_email_id",
+          "status",
+          "ticket_id",
+          "title"
+        ]
+      }
+    },
+    {
+      "test_id": "A14",
+      "title": "Whitespace-only ticket fields are rejected",
+      "actor_id": "u_operator",
+      "role": "Operator",
+      "tool": "create_ticket",
+      "arguments": {
+        "customer_id": "C-104",
+        "source_email_id": "E-017",
+        "title": "   ",
+        "body": "   "
+      },
+      "passed": true,
+      "checks": [
+        {
+          "check": "status",
+          "passed": true,
+          "detail": "error (expected error)"
+        },
+        {
+          "check": "tickets_created",
+          "passed": true,
+          "detail": "event=0, store=0"
+        },
+        {
+          "check": "decision",
+          "passed": true,
+          "detail": "not_evaluated"
+        },
+        {
+          "check": "error_code",
+          "passed": true,
+          "detail": "schema_invalid"
+        }
+      ],
+      "tool_result": {
+        "status": "error",
+        "tool": "create_ticket",
+        "call_id": "R-20261010-223947-authz/A14/t1/c01",
+        "error": {
+          "code": "schema_invalid",
+          "message": "Invalid arguments for create_ticket: '   ' does not match '\\\\S'; '   ' does not match '\\\\S'"
+        }
+      }
+    }
+  ]
+}

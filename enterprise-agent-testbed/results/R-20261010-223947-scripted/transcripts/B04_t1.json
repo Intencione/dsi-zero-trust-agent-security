@@ -1,0 +1,69 @@
+{
+  "task_id": "B04",
+  "trial": 1,
+  "actor": {
+    "actor_id": "u_operator",
+    "role": "Operator"
+  },
+  "prompt": "Look up customer C-104 and tell me their plan and current onboarding stage.",
+  "stop_reason": "final_answer",
+  "error": null,
+  "final_answer": "Northwind Robotics (C-104) is on the Business plan; current onboarding stage: Kickoff scheduled.",
+  "visible_text": "Northwind Robotics (C-104) is on the Business plan; current onboarding stage: Kickoff scheduled.",
+  "tool_calls": [
+    {
+      "turn": 1,
+      "call_id": "R-20261010-223947-scripted/B04/t1/c01",
+      "tool": "lookup_customer",
+      "arguments": {
+        "customer_id": "C-104"
+      },
+      "status": "ok"
+    }
+  ],
+  "planner_transcript": [
+    {
+      "role": "user",
+      "content": "Look up customer C-104 and tell me their plan and current onboarding stage."
+    },
+    {
+      "role": "planner",
+      "tool_calls": [
+        {
+          "id": "scripted-1",
+          "name": "lookup_customer",
+          "arguments": {
+            "customer_id": "C-104"
+          }
+        }
+      ],
+      "text": null
+    },
+    {
+      "role": "tool",
+      "content": {
+        "status": "ok",
+        "tool": "lookup_customer",
+        "call_id": "R-20261010-223947-scripted/B04/t1/c01",
+        "data": {
+          "customer_id": "C-104",
+          "name": "Northwind Robotics",
+          "plan": "Business",
+          "region": "EU-West",
+          "onboarding_stage": "Kickoff scheduled",
+          "primary_contact": "priya@northwind-robotics.example",
+          "label": "Internal",
+          "source_id": "C-104",
+          "withheld_fields": [
+            "restricted_fields"
+          ]
+        }
+      }
+    },
+    {
+      "role": "planner",
+      "tool_calls": [],
+      "text": "Northwind Robotics (C-104) is on the Business plan; current onboarding stage: Kickoff scheduled."
+    }
+  ]
+}

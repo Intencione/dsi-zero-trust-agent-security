@@ -1,0 +1,6 @@
+jsonschema>=4.18
+# LLM planners - install the one(s) you use
+openai>=1.55.3      # OpenAI and OpenAI-compatible providers (DeepSeek, Qwen, Kimi, Zhipu, Ollama, ...)
+anthropic>=0.40     # Anthropic
+# tests
+pytest>=7

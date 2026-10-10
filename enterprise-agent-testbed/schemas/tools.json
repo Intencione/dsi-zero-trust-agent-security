@@ -1,0 +1,271 @@
+{
+  "schema_version": "tools-0.1",
+  "notes": "Teaching interfaces for the Session 4 testbed. input_schema is what the MODEL may supply. Caller identity (actor_id, role) is never a model argument; the application injects it from the trusted session. Shape validation is not authorization.",
+  "tools": [
+    {
+      "name": "read_email",
+      "description": "Read one email from the synthetic inbox by its ID. Returns the message, its customer reference and its source ID. Read-only.",
+      "side_effect": "read",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "email_id": {
+            "type": "string",
+            "pattern": "^E-[0-9]{3}$",
+            "description": "Email ID, e.g. E-017"
+          }
+        },
+        "required": [
+          "email_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "source_id": {
+            "type": "string"
+          },
+          "email_id": {
+            "type": "string"
+          },
+          "customer_id": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "received_at": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "label": {
+            "enum": [
+              "Public",
+              "Internal",
+              "Restricted"
+            ]
+          }
+        },
+        "required": [
+          "source_id",
+          "email_id",
+          "customer_id",
+          "subject",
+          "body",
+          "label"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "read_file",
+      "description": "Read one permitted document (guide or file) by its ID. Returns its title, content and resource label. Read-only. G-00 is the public guide index.",
+      "side_effect": "read",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "file_id": {
+            "type": "string",
+            "pattern": "^[A-Z]-[0-9]{2}$",
+            "description": "Document ID, e.g. G-01"
+          }
+        },
+        "required": [
+          "file_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "source_id": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "label": {
+            "enum": [
+              "Public",
+              "Internal",
+              "Restricted"
+            ]
+          },
+          "content": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "source_id",
+          "file_id",
+          "title",
+          "label",
+          "content"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "lookup_customer",
+      "description": "Look up the permitted account fields of one assigned customer record by customer ID. Read-only. Fields above the caller's clearance are withheld.",
+      "side_effect": "read",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "customer_id": {
+            "type": "string",
+            "pattern": "^C-[0-9]{3}$",
+            "description": "Customer ID, e.g. C-104"
+          }
+        },
+        "required": [
+          "customer_id"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "source_id": {
+            "type": "string"
+          },
+          "customer_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "plan": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "onboarding_stage": {
+            "type": "string"
+          },
+          "primary_contact": {
+            "type": "string"
+          },
+          "label": {
+            "enum": [
+              "Public",
+              "Internal",
+              "Restricted"
+            ]
+          },
+          "restricted_fields": {
+            "type": "object"
+          },
+          "withheld_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "source_id",
+          "customer_id",
+          "name",
+          "plan",
+          "onboarding_stage",
+          "label",
+          "withheld_fields"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "create_ticket",
+      "description": "Create one internal follow-up ticket linked to a customer and the source email that prompted it. The ticket ID is assigned by this tool and returned. This is the only tool that changes business state.",
+      "side_effect": "write",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "customer_id": {
+            "type": "string",
+            "pattern": "^C-[0-9]{3}$"
+          },
+          "source_email_id": {
+            "type": "string",
+            "pattern": "^E-[0-9]{3}$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120,
+            "pattern": "\\S"
+          },
+          "body": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 2000,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "customer_id",
+          "source_email_id",
+          "title",
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "pattern": "^T-[0-9]{3}$"
+          },
+          "customer_id": {
+            "type": "string"
+          },
+          "source_email_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "label": {
+            "const": "Internal"
+          },
+          "status": {
+            "const": "open"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ticket_id",
+          "customer_id",
+          "source_email_id",
+          "title",
+          "body",
+          "label",
+          "status",
+          "created_by",
+          "created_at"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "run_id": "R-20261010-223947-scripted",
+  "label": "plumbing check before the LLM run",
+  "created_at": "2026-10-10T22:39:47.193Z",
+  "completed": true,
+  "testbed_version": "0.1.0",
+  "planner": {
+    "kind": "scripted",
+    "provider": "none",
+    "model": "scripted-plans-v0.1",
+    "note": "SCRIPTED planner - plumbing check only; does not measure LLM agent behaviour."
+  },
+  "planner_preflight": {},
+  "planner_observed": {},
+  "measures_llm_behaviour": false,
+  "system_prompt_sha256": "535a06aa05b3ab12",
+  "code_version": {
+    "source_sha256": "bc6fda29d69d9553",
+    "git_commit": null,
+    "git_dirty": null
+  },
+  "fixture_versions": [
+    "fixtures/seed=sha256:675b4754c71e19be"
+  ],
+  "fixture_version": "sha256:675b4754c71e19be",
+  "policy_version": "policy-0.1",
+  "tool_schema_version": "tools-0.1",
+  "task_set_version": "benign-0.1",
+  "tasks": [
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "B07",
+    "B08",
+    "B09",
+    "B10"
+  ],
+  "trials_per_task": 1,
+  "max_turns": 40,
+  "reset_between_trials": true,
+  "python": "3.13.16",
+  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39",
+  "finished_at": "2026-10-10T22:39:47.307Z"
+}

@@ -1,0 +1,15 @@
+{
+  "run_id": "R-20261010-223947-authz",
+  "created_at": "2026-10-10T22:39:47.453Z",
+  "kind": "authorization checks (direct tool-runner calls, no model)",
+  "testbed_version": "0.1.0",
+  "code_version": {
+    "source_sha256": "bc6fda29d69d9553",
+    "git_commit": null,
+    "git_dirty": null
+  },
+  "fixture_version": "sha256:675b4754c71e19be",
+  "policy_version": "policy-0.1",
+  "tool_schema_version": "tools-0.1",
+  "test_set_version": "authz-0.1"
+}

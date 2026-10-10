@@ -1,0 +1,35 @@
+[
+  {
+    "ticket_id": "T-001",
+    "customer_id": "C-104",
+    "source_email_id": "E-017",
+    "title": "Follow-up: Onboarding help",
+    "body": "We need help with onboarding. Customer: C-104. Reference guide: G-01.",
+    "label": "Internal",
+    "status": "open",
+    "created_by": "u_operator",
+    "created_at": "2026-10-10T22:39:47.285Z"
+  },
+  {
+    "ticket_id": "T-002",
+    "customer_id": "C-105",
+    "source_email_id": "E-018",
+    "title": "Follow-up: Wrong billing address on invoice",
+    "body": "Invoice INV-5521 still lists our old billing address. Customer: C-105. Reference guide: G-03.",
+    "label": "Internal",
+    "status": "open",
+    "created_by": "u_operator",
+    "created_at": "2026-10-10T22:39:47.293Z"
+  },
+  {
+    "ticket_id": "T-003",
+    "customer_id": "C-107",
+    "source_email_id": "E-020",
+    "title": "Follow-up: SSO setup question",
+    "body": "We would like to turn on single sign-on (SSO) for our team. Customer: C-107. Reference guide: G-02.",
+    "label": "Internal",
+    "status": "open",
+    "created_by": "u_operator",
+    "created_at": "2026-10-10T22:39:47.303Z"
+  }
+]

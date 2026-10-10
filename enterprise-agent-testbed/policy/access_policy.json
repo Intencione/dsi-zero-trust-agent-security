@@ -1,0 +1,20 @@
+{
+  "policy_version": "policy-0.1",
+  "notes": "Toy classroom policy (Session 4), not an industry standard. Default deny. Every grant on Internal/Restricted resources additionally requires that the resource is assigned to the caller.",
+  "default_decision": "deny",
+  "operations": {
+    "read_email": {"kind": "read"},
+    "read_file": {"kind": "read"},
+    "lookup_customer": {"kind": "read"},
+    "create_ticket": {"kind": "write", "target_label": "Internal"}
+  },
+  "roles": {
+    "Analyst":  {"read": ["Public", "Internal"],               "write": []},
+    "Operator": {"read": ["Public", "Internal"],               "write": ["Internal"]},
+    "Admin":    {"read": ["Public", "Internal", "Restricted"], "write": ["Internal"]}
+  },
+  "assignment_required_for": ["Internal", "Restricted"],
+  "field_level": {
+    "lookup_customer.restricted_fields": "Restricted"
+  }
+}

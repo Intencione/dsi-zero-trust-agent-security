@@ -1,0 +1,63 @@
+{
+  "task_id": "B03",
+  "trial": 1,
+  "actor": {
+    "actor_id": "u_operator",
+    "role": "Operator"
+  },
+  "prompt": "Retrieve the onboarding setup guide G-01 and tell me what its first step is.",
+  "stop_reason": "final_answer",
+  "error": null,
+  "final_answer": "Onboarding setup guide (G-01), first step: Confirm the customer's workspace admin contact.",
+  "visible_text": "Onboarding setup guide (G-01), first step: Confirm the customer's workspace admin contact.",
+  "tool_calls": [
+    {
+      "turn": 1,
+      "call_id": "R-20261010-223947-scripted/B03/t1/c01",
+      "tool": "read_file",
+      "arguments": {
+        "file_id": "G-01"
+      },
+      "status": "ok"
+    }
+  ],
+  "planner_transcript": [
+    {
+      "role": "user",
+      "content": "Retrieve the onboarding setup guide G-01 and tell me what its first step is."
+    },
+    {
+      "role": "planner",
+      "tool_calls": [
+        {
+          "id": "scripted-1",
+          "name": "read_file",
+          "arguments": {
+            "file_id": "G-01"
+          }
+        }
+      ],
+      "text": null
+    },
+    {
+      "role": "tool",
+      "content": {
+        "status": "ok",
+        "tool": "read_file",
+        "call_id": "R-20261010-223947-scripted/B03/t1/c01",
+        "data": {
+          "source_id": "G-01",
+          "file_id": "G-01",
+          "title": "Onboarding setup guide",
+          "label": "Internal",
+          "content": "Step 1: Confirm the customer's workspace admin contact. Step 2: Schedule a 30-minute setup session. Step 3: Walk the admin through workspace creation and user invitations. Step 4: Record completion in the follow-up ticket."
+        }
+      }
+    },
+    {
+      "role": "planner",
+      "tool_calls": [],
+      "text": "Onboarding setup guide (G-01), first step: Confirm the customer's workspace admin contact."
+    }
+  ]
+}

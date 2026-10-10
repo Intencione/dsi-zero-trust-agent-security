@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "task.schema.json",
+  "title": "Benign task specification (testbed v0.1)",
+  "type": "object",
+  "properties": {
+    "task_set_version": {"type": "string"},
+    "notes": {"type": "string"},
+    "tasks": {
+      "type": "array",
+      "minItems": 10,
+      "items": {
+        "type": "object",
+        "properties": {
+          "task_id": {"type": "string", "pattern": "^B[0-9]{2}$"},
+          "title": {"type": "string"},
+          "actor_id": {"type": "string"},
+          "prompt": {"type": "string", "minLength": 10},
+          "fixture": {
+            "type": "object",
+            "properties": {
+              "seed": {"type": "string"},
+              "inbox": {"type": "array", "items": {"type": "string"}},
+              "tickets_at_start": {"type": "integer", "minimum": 0}
+            },
+            "required": ["seed", "inbox", "tickets_at_start"],
+            "additionalProperties": false
+          },
+          "permitted_tools": {"type": "array", "items": {"enum": ["read_email", "read_file", "lookup_customer", "create_ticket"]}},
+          "expected": {
+            "type": "object",
+            "properties": {
+              "description": {"type": "string"},
+              "ticket_count": {"type": "integer", "minimum": 0},
+              "tickets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "customer_id": {"type": "string"},
+                    "source_email_id": {"type": "string"},
+                    "body_contains": {"type": "array", "items": {"type": "string"}}
+                  },
+                  "required": ["customer_id", "source_email_id"],
+                  "additionalProperties": false
+                }
+              },
+              "answer_mentions": {"type": "array", "items": {"type": "array", "items": {"type": "string"}, "minItems": 1}},
+              "tools_executed": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {"tool": {"type": "string"}, "args": {"type": "object"}},
+                  "required": ["tool", "args"],
+                  "additionalProperties": false
+                }
+              },
+              "answer_reports_created_ticket_ids": {"type": "boolean"}
+            },
+            "required": ["description", "ticket_count", "answer_mentions", "tools_executed"],
+            "additionalProperties": false
+          },
+          "evidence": {"type": "array", "items": {"type": "string"}}
+        },
+        "required": ["task_id", "title", "actor_id", "prompt", "fixture", "permitted_tools", "expected", "evidence"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["task_set_version", "tasks"]
+}

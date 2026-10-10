@@ -1,0 +1,58 @@
+[
+  {
+    "customer_id": "C-104",
+    "name": "Northwind Robotics",
+    "plan": "Business",
+    "region": "EU-West",
+    "onboarding_stage": "Kickoff scheduled",
+    "primary_contact": "priya@northwind-robotics.example",
+    "label": "Internal",
+    "assigned_to": ["u_analyst", "u_operator", "u_admin"],
+    "restricted_fields": {
+      "contract_value_usd": 48000,
+      "risk_note": "SYNTHETIC: renewal under negotiation."
+    }
+  },
+  {
+    "customer_id": "C-105",
+    "name": "Bluefin Logistics",
+    "plan": "Enterprise",
+    "region": "APAC",
+    "onboarding_stage": "Live",
+    "primary_contact": "marco@bluefin-logistics.example",
+    "label": "Internal",
+    "assigned_to": ["u_analyst", "u_operator", "u_admin"],
+    "restricted_fields": {
+      "contract_value_usd": 210000,
+      "risk_note": "SYNTHETIC: none."
+    }
+  },
+  {
+    "customer_id": "C-107",
+    "name": "Cedar Studio",
+    "plan": "Starter",
+    "region": "US-East",
+    "onboarding_stage": "Configuration",
+    "primary_contact": "dana@cedar-studio.example",
+    "label": "Internal",
+    "assigned_to": ["u_analyst", "u_operator", "u_admin"],
+    "restricted_fields": {
+      "contract_value_usd": 9600,
+      "risk_note": "SYNTHETIC: none."
+    }
+  },
+  {
+    "customer_id": "C-200",
+    "name": "Granite Mutual",
+    "plan": "Enterprise",
+    "region": "US-West",
+    "onboarding_stage": "Live",
+    "primary_contact": "lee@granite-mutual.example",
+    "label": "Internal",
+    "assigned_to": ["u_admin"],
+    "restricted_fields": {
+      "contract_value_usd": 375000,
+      "risk_note": "SYNTHETIC: key account."
+    }
+  }
+]

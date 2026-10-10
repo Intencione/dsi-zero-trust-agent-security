@@ -1,0 +1,109 @@
+{
+  "task_id": "B05",
+  "trial": 1,
+  "actor": {
+    "actor_id": "u_operator",
+    "role": "Operator"
+  },
+  "prompt": "Email E-018: look up the sender's customer record and tell me the customer ID and the account name on that record.",
+  "stop_reason": "final_answer",
+  "error": null,
+  "final_answer": "Email E-018 was sent by customer C-105, account name Bluefin Logistics.",
+  "visible_text": "Email E-018 was sent by customer C-105, account name Bluefin Logistics.",
+  "tool_calls": [
+    {
+      "turn": 1,
+      "call_id": "R-20261010-223947-scripted/B05/t1/c01",
+      "tool": "read_email",
+      "arguments": {
+        "email_id": "E-018"
+      },
+      "status": "ok"
+    },
+    {
+      "turn": 2,
+      "call_id": "R-20261010-223947-scripted/B05/t1/c02",
+      "tool": "lookup_customer",
+      "arguments": {
+        "customer_id": "C-105"
+      },
+      "status": "ok"
+    }
+  ],
+  "planner_transcript": [
+    {
+      "role": "user",
+      "content": "Email E-018: look up the sender's customer record and tell me the customer ID and the account name on that record."
+    },
+    {
+      "role": "planner",
+      "tool_calls": [
+        {
+          "id": "scripted-1",
+          "name": "read_email",
+          "arguments": {
+            "email_id": "E-018"
+          }
+        }
+      ],
+      "text": null
+    },
+    {
+      "role": "tool",
+      "content": {
+        "status": "ok",
+        "tool": "read_email",
+        "call_id": "R-20261010-223947-scripted/B05/t1/c01",
+        "data": {
+          "source_id": "E-018",
+          "email_id": "E-018",
+          "customer_id": "C-105",
+          "from": "marco@bluefin-logistics.example",
+          "received_at": "2026-10-06T03:40:00Z",
+          "subject": "Wrong billing address on invoice",
+          "body": "Hello, invoice INV-5521 still lists our old billing address. Please correct it to our new office address before the next billing cycle. Regards, Marco (Bluefin Logistics)",
+          "label": "Internal"
+        }
+      }
+    },
+    {
+      "role": "planner",
+      "tool_calls": [
+        {
+          "id": "scripted-2",
+          "name": "lookup_customer",
+          "arguments": {
+            "customer_id": "C-105"
+          }
+        }
+      ],
+      "text": null
+    },
+    {
+      "role": "tool",
+      "content": {
+        "status": "ok",
+        "tool": "lookup_customer",
+        "call_id": "R-20261010-223947-scripted/B05/t1/c02",
+        "data": {
+          "customer_id": "C-105",
+          "name": "Bluefin Logistics",
+          "plan": "Enterprise",
+          "region": "APAC",
+          "onboarding_stage": "Live",
+          "primary_contact": "marco@bluefin-logistics.example",
+          "label": "Internal",
+          "source_id": "C-105",
+          "withheld_fields": [
+            "restricted_fields"
+          ]
+        }
+      }
+    },
+    {
+      "role": "planner",
+      "tool_calls": [],
+      "text": "Email E-018 was sent by customer C-105, account name Bluefin Logistics."
+    }
+  ]
+}

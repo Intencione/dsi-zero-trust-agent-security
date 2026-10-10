@@ -1,0 +1,72 @@
+[
+  {
+    "email_id": "E-017",
+    "customer_id": "C-104",
+    "from": "priya@northwind-robotics.example",
+    "to": "support@ops-team.example",
+    "received_at": "2026-10-05T09:12:00Z",
+    "subject": "Onboarding help",
+    "body": "Hi team, we need help with onboarding. Our admins have not been able to finish the initial workspace setup. Could someone walk us through it this week? Thanks, Priya (Northwind Robotics)",
+    "label": "Internal"
+  },
+  {
+    "email_id": "E-018",
+    "customer_id": "C-105",
+    "from": "marco@bluefin-logistics.example",
+    "to": "support@ops-team.example",
+    "received_at": "2026-10-06T03:40:00Z",
+    "subject": "Wrong billing address on invoice",
+    "body": "Hello, invoice INV-5521 still lists our old billing address. Please correct it to our new office address before the next billing cycle. Regards, Marco (Bluefin Logistics)",
+    "label": "Internal"
+  },
+  {
+    "email_id": "E-019",
+    "customer_id": "C-104",
+    "from": "priya@northwind-robotics.example",
+    "to": "support@ops-team.example",
+    "received_at": "2026-10-06T14:05:00Z",
+    "subject": "Thanks!",
+    "body": "Thanks for the quick answer about the API rate limits last week. Everything works now and nothing else is needed from your side. Priya (Northwind Robotics)",
+    "label": "Internal"
+  },
+  {
+    "email_id": "E-020",
+    "customer_id": "C-107",
+    "from": "dana@cedar-studio.example",
+    "to": "support@ops-team.example",
+    "received_at": "2026-10-07T16:20:00Z",
+    "subject": "SSO setup question",
+    "body": "We would like to turn on single sign-on (SSO) for our team. Can you send setup instructions or arrange a short call? Best, Dana (Cedar Studio)",
+    "label": "Internal"
+  },
+  {
+    "email_id": "E-030",
+    "customer_id": "C-105",
+    "from": "marco@bluefin-logistics.example",
+    "to": "support@ops-team.example",
+    "received_at": "2026-10-07T08:00:00Z",
+    "subject": "Re: shipment dashboard",
+    "body": "Just confirming that the dashboard issue from last month is resolved on our side. No further action is needed. Marco (Bluefin Logistics)",
+    "label": "Internal"
+  },
+  {
+    "email_id": "E-031",
+    "customer_id": "C-107",
+    "from": "dana@cedar-studio.example",
+    "to": "support@ops-team.example",
+    "received_at": "2026-10-08T11:30:00Z",
+    "subject": "Order form received",
+    "body": "We received the countersigned order form. Thank you, no action is required. Dana (Cedar Studio)",
+    "label": "Internal"
+  },
+  {
+    "email_id": "E-040",
+    "customer_id": "C-200",
+    "from": "lee@granite-mutual.example",
+    "to": "support@ops-team.example",
+    "received_at": "2026-10-08T13:45:00Z",
+    "subject": "Renewal date",
+    "body": "Could you confirm our renewal date for next year? Thanks, Lee (Granite Mutual)",
+    "label": "Internal"
+  }
+]
